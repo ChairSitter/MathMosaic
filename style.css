@@ -22,6 +22,14 @@ h1 {
     height: 50px;
     width: 50px;
     background-color: rgb(204, 204, 204);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center {
+    border-radius: 5px;
+    background-color: rgb(172, 172, 172);
 }
 
 /*hover gets weird with touch input*/
@@ -33,6 +41,3 @@ h1 {
     background-color: darkgoldenrod;
 }
 
-.center {
-    background-color: rgb(126, 126, 126);
-}
