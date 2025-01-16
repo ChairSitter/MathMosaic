@@ -16,14 +16,29 @@ const cellArray = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
 
-//creates the game grid
+class Cell {
+    #value;
+    constructor(column, row){
+        this.column = column;
+        this.row = row;
+        this.name = `Cell ${column}, ${row}`;
+    }
+    setValue(value){
+        this.#value = value;
+    }
+    getValue(){
+        return this.#value;
+    }
+}
 
+//creates the game grid
 for(let column = 0; column < containerSize; column++){
     for(let row = 0; row < containerSize; row++){
         let cell = document.createElement('div');
         cell.classList.add('cell');
         cell.dataset.column = column;
         cell.dataset.row = row;
+        cell.dataset.value = 0;
         if(column === 5 && row === 5){
             cell.classList.add('center');
         }
@@ -31,6 +46,8 @@ for(let column = 0; column < containerSize; column++){
         container.appendChild(cell);
     }
 }
+
+
 
 console.log(cellArray);
 
@@ -47,13 +64,21 @@ for(let column = 0; column < containerSize; column++){
         if(cellArray[column][row].dataset.column == curCell[0] && cellArray[column][row].dataset.row == curCell[1]){
             console.log(cellArray[column][row], 'logging current cell');
             cellArray[column][row].textContent = curVal;
+            cellArray[column][row].dataset.value = 1;
             cellArray[column-1][row+1].textContent = 1;
+            cellArray[column][row].dataset.value = 2;
             cellArray[column][row+1].textContent = 2;
+            cellArray[column][row].dataset.value = 3;
             cellArray[column+1][row+1].textContent = 3;
+            cellArray[column][row].dataset.value = 4;
             cellArray[column+1][row].textContent = 4;
+            cellArray[column][row].dataset.value = 5;
             cellArray[column+1][row-1].textContent = 5;
+            cellArray[column][row].dataset.value = 6;
             cellArray[column][row-1].textContent = 6;
+            cellArray[column][row].dataset.value = 7;
             cellArray[column-1][row-1].textContent = 7;
+            cellArray[column][row].dataset.value = 8;
             cellArray[column-1][row].textContent = 8;
         }
     }
