@@ -24,6 +24,7 @@ h1 {
     background-color: rgb(204, 204, 204);
 }
 
+/*hover gets weird with touch input*/
 .cell:hover {
     background-color: gold;
 }
