@@ -22,4 +22,10 @@ for(let column = 0; column < containerSize; column++){
 document.addEventListener('click', () => console.log(stateArray));
 
 //run the game
+const mosaicArray = [];
+const curCell = [5, 5];
+const curTar = 10;
+
+
+
 
