@@ -1,0 +1,37 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+#container {
+    display: grid;
+    grid-template-columns: repeat(11, 50px);
+    grid-template-rows: repeat(11, 50px);
+    column-gap: 3px;
+    row-gap: 3px;
+}
+
+.cell {
+    height: 50px;
+    width: 50px;
+    background-color: rgb(204, 204, 204);
+}
+
+.cell:hover {
+    background-color: gold;
+}
+
+.cell:active {
+    background-color: darkgoldenrod;
+}
+
+.center {
+    background-color: rgb(126, 126, 126);
+}
