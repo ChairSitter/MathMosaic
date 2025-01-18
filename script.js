@@ -23,16 +23,17 @@ class Cell {
     #row;
     #div;
 
-    constructor(column, row){
+    constructor(column, row, div){
         this.#column = column;
         this.#row = row;
+        this.#div = div;
         this.#name = `Cell ${column}, ${row}`;
     }
 
     setDiv(){
 
     }
-    
+
     setValue(value){
         this.#value = value;
     }
