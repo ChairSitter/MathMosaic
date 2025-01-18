@@ -18,16 +18,36 @@ const cellArray = [
 
 class Cell {
     #value;
+    #column;
+    #name;
+    #row;
+    #div;
+
     constructor(column, row){
-        this.column = column;
-        this.row = row;
-        this.name = `Cell ${column}, ${row}`;
+        this.#column = column;
+        this.#row = row;
+        this.#name = `Cell ${column}, ${row}`;
     }
+
+    setDiv(){
+
+    }
+    
     setValue(value){
         this.#value = value;
     }
     getValue(){
         return this.#value;
+    }
+
+    getColumn(){
+        return this.#column;
+    }
+    getRow(){
+        return this.#row;
+    }
+    getName(){
+        return this.#name;
     }
 }
 
