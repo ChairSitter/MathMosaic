@@ -17,58 +17,64 @@ const cellArray = [
 ];
 
 class Cell {
-    #value;
-    #column;
-    #name;
-    #row;
-    #div;
+    value;
+    row;
+    column;
+    name;
+    div;
 
-    constructor(column, row, div){
-        this.#column = column;
-        this.#row = row;
-        this.#div = div;
-        this.#name = `Cell ${column}, ${row}`;
+    topRight;
+    right;
+    botRight;
+    bot;
+    botLeft;
+    left;
+    topLeft;
+    top;
+
+    constructor(row, column, div){
+        this.row = row; 
+        this.column = column;
+        this.div = div;
+        this.name = `Cell ${row}, ${column}`;
     }
 
-    setDiv(){
-
-    }
-
-    setValue(value){
-        this.#value = value;
-    }
-    getValue(){
-        return this.#value;
-    }
-
-    getColumn(){
-        return this.#column;
-    }
     getRow(){
-        return this.#row;
+        return this.row;
+    }
+    getColumn(){
+        return this.column;
+    }
+    getDiv(){
+        return this.div;
     }
     getName(){
-        return this.#name;
+        return this.name;
+    }    
+    
+    setValue(value){
+        this.value = value;
+    }
+    getValue(){
+        return this.value;
     }
 }
 
 //creates the game grid
-for(let column = 0; column < containerSize; column++){
-    for(let row = 0; row < containerSize; row++){
-        let cell = document.createElement('div');
-        cell.classList.add('cell');
-        cell.dataset.column = column;
-        cell.dataset.row = row;
-        cell.dataset.value = 0;
-        if(column === 5 && row === 5){
-            cell.classList.add('center');
+for(let row = 0; row < containerSize; row++){
+    for(let column = 0; column < containerSize; column++){
+        let cell = new Cell(row, column, document.createElement('div'));
+        cell.div.classList.add('cell');
+        cell.div.dataset.row = row;
+        cell.div.dataset.column = column;
+        cell.div.dataset.value = 0;
+        if(row === 5 && column === 5){
+            cell.div.classList.add('center');
         }
-        cellArray[column][row] = cell;
-        container.appendChild(cell);
+        cellArray[row][column] = cell;
+        container.appendChild(cell.div);
     }
 }
-
-
 
 console.log(cellArray);
 
@@ -79,28 +85,36 @@ const curVal = 5;
 
 const curTar = 10; //from mosaicArray
 
+//assign relationships between cells
+for(let row = 0; row < containerSize; row++){
+    for(let column = 0; column < containerSize; column++){
+        let thisCell = cellArray[row][column];
+        if(row > 0 && column < 10) thisCell.topRight = cellArray[row-1][column+1];
+        if(column < 10) thisCell.topRight = cellArray[row][column+1];
+        if(row < 10 && column < 10) thisCell.topRight = cellArray[row+1][column+1];
+        if(row < 10) thisCell.topRight = cellArray[row+1][column];
+        if(row < 10 && column > 0) thisCell.topRight = cellArray[row+1][column-1];
+        if(column > 0) thisCell.topRight = cellArray[row][column-1];
+        if(row > 0 && column > 0) thisCell.topRight = cellArray[row-1][column-1];
+        if(row > 0)thisCell.topRight = cellArray[row-1][column];
+    }
+}
+
 //access specific cell using curCell variable
-for(let column = 0; column < containerSize; column++){
-    for(let row = 0; row < containerSize; row++){
-        if(cellArray[column][row].dataset.column == curCell[0] && cellArray[column][row].dataset.row == curCell[1]){
-            console.log(cellArray[column][row], 'logging current cell');
-            cellArray[column][row].textContent = curVal;
-            cellArray[column][row].dataset.value = 1;
-            cellArray[column-1][row+1].textContent = 1;
-            cellArray[column][row].dataset.value = 2;
-            cellArray[column][row+1].textContent = 2;
-            cellArray[column][row].dataset.value = 3;
-            cellArray[column+1][row+1].textContent = 3;
-            cellArray[column][row].dataset.value = 4;
-            cellArray[column+1][row].textContent = 4;
-            cellArray[column][row].dataset.value = 5;
-            cellArray[column+1][row-1].textContent = 5;
-            cellArray[column][row].dataset.value = 6;
-            cellArray[column][row-1].textContent = 6;
-            cellArray[column][row].dataset.value = 7;
-            cellArray[column-1][row-1].textContent = 7;
-            cellArray[column][row].dataset.value = 8;
-            cellArray[column-1][row].textContent = 8;
+for(let row = 0; row < containerSize; row++){
+    for(let column = 0; column < containerSize; column++){
+        if(cellArray[row][column].div.dataset.row == curCell[0] && cellArray[row][column].getDiv().dataset.column == curCell[1]){
+            console.log(cellArray[row][column], 'logging current cell');
+            cellArray[row][column].div.textContent = curVal; //current
+
+            cellArray[row-1][column+1].div.textContent = 1; //topRight
+            cellArray[row][column+1].div.textContent = 2; //right
+            cellArray[row+1][column+1].div.textContent = 3; //botRight
+            cellArray[row+1][column].div.textContent = 4; //bot
+            cellArray[row+1][column-1].div.textContent = 5; //botLeft
+            cellArray[row][column-1].div.textContent = 6; //left
+            cellArray[row-1][column-1].div.textContent = 7; //topLeft
+            cellArray[row-1][column].div.textContent = 8; //top
         }
     }
 }
