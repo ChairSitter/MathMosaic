@@ -92,10 +92,14 @@ for(let row = 0; row < containerSize; row++){
 }
 
 //game variables
-const mosaicArray = [13, 9, 10, 11];
+const mosaicArray = [13, 9, 10, 2, 2, 8, 3, 5];
 const curCell = [5, 5];
 let curVal = 5;
 
+
+for(let i = 0; i < mosaicArray.length; i++){
+    
+}
 const curTar = 10; //from mosaicArray
 
 
